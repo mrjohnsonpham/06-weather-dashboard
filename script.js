@@ -36,16 +36,30 @@ var callWeatherApi = function(cityInput, addToList) {
 
         var weatherIcon = response.weather[0].icon;
 
-        // $("#cityName").html(response.name + " (" + new Date().toLocaleDateString() + ")");
+        $("#cityName").html(response.name + " (" + new Date().toLocaleDateString() + ")");
         $("#mainIcon").html("<img src='" + "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png" + "'>")
         $("#temperature").html("Temperature: " + response.main.temp + " &#8457;");
         // where did &#8457 come from? it is the html for fahrenheit
         $("#humidity").text("Humidity: " + response.main.humidity + "%");
         $("#wind-speed").text("Wind Speed: " + response.wind.speed + " MPH ")
-        $("uv-index").text("UV Index");
+        $("#uv-index").text("UV Index");
     });
 }
 
+// Add localStorage for City Input and append the search results 
+// Create a button using jQuery
+// Create a unordered list class and have it appended to the button 
+// Have the list be able to display the text from the City Input text field
+
+if (addtoList === true){
+    var li = $("<button class='list-group-item town'>");
+    // created a button with a variable to call 
+    $("ul").append(li);
+    li.text(cityInput);
+}
+// I don't think this is working yet 
 
 
+// Use the Weather API to call the Five day Forecast
+// Create a variable for the five day forecast 
 
