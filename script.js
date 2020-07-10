@@ -39,7 +39,10 @@ var callWeatherApi = function(cityInput, addToList) {
         // $("#cityName").html(response.name + " (" + new Date().toLocaleDateString() + ")");
         $("#mainIcon").html("<img src='" + "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png" + "'>")
         $("#temperature").html("Temperature: " + response.main.temp + " &#8457;");
+        // where did &#8457 come from? it is the html for fahrenheit
         $("#humidity").text("Humidity: " + response.main.humidity + "%");
+        $("#wind-speed").text("Wind Speed: " + response.wind.speed + " MPH ")
+        $("uv-index").text("UV Index");
     });
 }
 
