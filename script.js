@@ -4,7 +4,7 @@
 // Have
 
 $(".btn-primary").on("click", function(event) {
-    event.preventDefault();
+    // event.preventDefault();
     // why did we use preventDefault function?
     var cityInput = $("#searchTerms").val();
 
@@ -33,8 +33,9 @@ var callWeatherApi = function(cityInput, addToList) {
 
     var APIKey = "d292af27d806c0fcfa7e75827ed7045b"
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?units=imperial&q=" + cityInput + "&appid=" + APIKey;
+    // var qUVindex = "https://api.openweathermap.org/data/2.5/uvi?" + "&appid=" + APIKey;
     var fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?units=imperial&q=" + cityInput + "&appid=" + APIKey;
-
+    
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -73,14 +74,72 @@ if (addToList === true){
 
 // Use the Weather API to call the Five day Forecast
 // Create a variable for the five day forecast 
+// Create a loop for the five day forecast to appear 
+// Find through the response where the index should start and how much to increment 
+// Create a variable for the forecastIndex
+// 
+
+// $.ajax({
+//     url: qUVindex,
+//     method: "GET"
+// }).then(function (UVresponse) {
+//     var UVIndex = UVresponse.value;
+//     var pTag = $("<p>").text("UV Index: " + UVIndex)
+//     currentdata.append(pTag);
+//     pTag.addClass("index");
+//     var UVcond
+//     //UV Index color that indicates whether the conditions are favorable, moderate, or severe
+//     if (UVIndex > 2) {
+//         $(".index").css("background-color", "#82E0AA");
+//         UVcond = $("<p>").text("Favorable");
+//         currentdata.append(UVcond);
+//     }
+//     else if (UVIndex < 6) {
+//         $(".index").css("background-color", "#FFF176");
+//         UVcond = $("<p>").text("Moderate");
+//         currentdata.append(UVcond);
+//     }
+//     else if (UVIndex < 8) {
+//         $(".index").css("background-color", "#FFB74D");
+//         UVcond = $("<p>").text("Moderate");
+//         currentdata.append(UVcond);
+//     }
+//     else if (UVIndex < 11) {
+//         $(".index").css("background-color", "red");
+//         UVcond = $("<p>").text("Severe");
+//         currentdata.append(UVcond);
+//     }
+//     else {
+//         $(".index").css("background-color", "firebrick");
+//         UVcond = $("<p>").text("SEVERE");
+//         currentdata.append(UVcond);
+//     }
+//     $(currentdata).append(UV);
+   
+// })
 
 
-    $.ajax({
-            url: fiveDayURL,
-            method: "GET"
-        })
-        .then(function(response){
-        
-        });
 
+
+$.ajax({
+    url: fiveDayURL,
+    method: "GET"
+})
+.then(function(response) {
+    console.log(response);
+
+    var forecastIndex = 1
+
+    for (i = 6; i < response.list.length; i += 8) {
+
+        var fivedayIcon = response.list[i].weather[0].icon;
+
+        $("#frcst" + forecastIndex).html("").append("<div>" + new Date(response.list[i].dt_txt).toLocaleDateString() + "<br>" + "<img src='" + "http://openweathermap.org/img/wn/" + fivedayIcon + "@2x.png" + "'>" + "</div>");
+        $("#frcstIcon").html(response.list[i].weather[0].icon);
+        $("#frcst" + forecastIndex).append("<div class='frcstTemp'>" + "Temp: " + response.list[i].main.temp + " &#8457;" + "</div>");
+        $("#frcst" + forecastIndex).append("<div>" + "Humidity: " + response.list[i].main.humidity + "%" + "</div>");
+        forecastIndex++
+         // without it, it would not display all the cards and only show the result of one
     }
+});
+}
