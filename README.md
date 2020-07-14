@@ -27,6 +27,14 @@ THEN the user will still be able to see the last city that was searched.
 ![](images/searchbar.png
 
 
+```
+## Technologies Used
+ - Technologies Used
+ - JavaScript
+ - OpenWeather API
+ - HTML
+ - CSS
+```
 
 The following image demonstrates the application functionality:
 * https://mrjohnsonpham.github.io/06-weather-dashboard/
