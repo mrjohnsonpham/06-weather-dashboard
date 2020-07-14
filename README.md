@@ -22,6 +22,12 @@ WHEN the user wants to refresh
 THEN the user will still be able to see the last city that was searched.
 
 ```
+# Demo
+```
+![](images/searchbar.png
+
+
+
 The following image demonstrates the application functionality:
 * https://mrjohnsonpham.github.io/06-weather-dashboard/
 * https://github.com/mrjohnsonpham/06-weather-dashboard
